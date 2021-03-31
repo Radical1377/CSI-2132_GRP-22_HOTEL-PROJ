@@ -6,25 +6,30 @@ static GUI theGUI;
 
 private JPanel panel0;
 
-private JPanel[] panels = new JPanel[2];
+private JPanel[] panels = new JPanel[3];
 private JButton but0;
 private JButton but4;
 private JButton logoutBtn;
+private JButton logoutBtn2;
 private JLabel label0;
 private JPanel panel6;
 private JPanel panel7;
+private JPanel panel2;
+private JTextArea consoleText;
+private JButton querySubmitBtn;
 
+private JTabbedPane tabbedPane0;
 private JTabbedPane tabbedPane1;
 
 private Controller controller;
 
-public GUI(Controller ctrler) {
+public GUI(Controller controller) {
 
     super("Hotel Client");
 
 	this.setPreferredSize(new Dimension(800, 600));
 
-	this.controller = ctrler;
+	this.controller = controller;
 
 
 	// WELCOME SCREEN
@@ -39,8 +44,8 @@ public GUI(Controller ctrler) {
 	GridBagConstraints gbcpanel1 = new GridBagConstraints();
 	panels[0].setLayout(gbpanel1);
 	
-	but0 = new JButton("Customer Portal");
-	but0.setName("Customer Portal");
+	but0 = new JButton("Admin Portal");
+	but0.setName("Admin Portal");
 	gbcpanel1.gridx = 0;
 	gbcpanel1.gridy = 1;
 	gbcpanel1.gridwidth = 1;
@@ -93,6 +98,8 @@ public GUI(Controller ctrler) {
 
 	//WELCOME SCREEN END
 	
+
+	//EMPLOYEE SCREEN START	
 	panels[1] = new JPanel();
 	panels[1].setBorder(BorderFactory.createTitledBorder("Employee Portal"));
 	GridBagLayout gbpanel_emp = new GridBagLayout();
@@ -105,7 +112,7 @@ public GUI(Controller ctrler) {
 	GridBagLayout gbpanel6 = new GridBagLayout();
 	GridBagConstraints gbcpanel6 = new GridBagConstraints();
 	panel6.setLayout(gbpanel6);
-	tabbedPane1.addTab("Profile",panel6);
+//	tabbedPane1.addTab("Profile",panel6);
 	
 	panel7 = new JPanel();
 	GridBagLayout gbpanel7 = new GridBagLayout();
@@ -148,6 +155,89 @@ public GUI(Controller ctrler) {
 	gbcpanel0.anchor = GridBagConstraints.NORTH;
 	gbpanel0.setConstraints(panels[1], gbcpanel0);
 	panel0.add(panels[1]);
+	//EMPLOYEE SCREEN END
+
+	//ADMIN SCREEN START
+	panels[2] = new JPanel();
+	panels[2].setBorder(BorderFactory.createTitledBorder("Admin Portal"));
+	GridBagLayout gbpanel_adm = new GridBagLayout();
+	GridBagConstraints gbcpanel_adm = new GridBagConstraints();
+	panels[2].setLayout(gbpanel_adm);
+
+	tabbedPane0 = new JTabbedPane();
+
+	panel2 = new JPanel();
+	GridBagLayout gbpanel2 = new GridBagLayout();
+	GridBagConstraints gbcpanel2 = new GridBagConstraints();
+	panel2.setLayout(gbpanel2);
+
+	consoleText = new JTextArea(2,10);
+	gbcpanel2.gridx = 0;
+	gbcpanel2.gridy = 0;
+	gbcpanel2.gridwidth = 20;
+	gbcpanel2.gridheight = 12;
+	gbcpanel2.fill = GridBagConstraints.BOTH;
+	gbcpanel2.weightx = 1;
+	gbcpanel2.weighty = 1;
+	gbcpanel2.anchor = GridBagConstraints.NORTH;
+	gbpanel2.setConstraints(consoleText, gbcpanel2);
+	panel2.add(consoleText);
+
+	querySubmitBtn = new JButton("Submit Query");
+	querySubmitBtn.setName("Submit Query");
+	gbcpanel2.gridx = 2;
+	gbcpanel2.gridy = 12;
+	gbcpanel2.gridwidth = 16;
+	gbcpanel2.gridheight = 3;
+	gbcpanel2.fill = GridBagConstraints.BOTH;
+	gbcpanel2.weightx = 1;
+	gbcpanel2.weighty = 0;
+	gbcpanel2.anchor = GridBagConstraints.NORTH;
+	gbcpanel2.insets = new Insets(0,0,9,0);
+	gbpanel2.setConstraints(querySubmitBtn, gbcpanel2);
+	panel2.add(querySubmitBtn);
+	querySubmitBtn.addActionListener(controller);
+
+
+	tabbedPane0.addTab("Admin Console",panel2);
+	gbcpanel_adm.gridx = 0;
+	gbcpanel_adm.gridy = 0;
+	gbcpanel_adm.gridwidth = 20;
+	gbcpanel_adm.gridheight = 18;
+	gbcpanel_adm.fill = GridBagConstraints.BOTH;
+	gbcpanel_adm.weightx = 1;
+	gbcpanel_adm.weighty = 1;
+	gbcpanel_adm.anchor = GridBagConstraints.NORTH;
+	gbpanel_adm.setConstraints(tabbedPane0, gbcpanel_adm);
+	panels[2].add(tabbedPane0);
+
+	logoutBtn2 = new JButton("Logout");
+	logoutBtn2.setName("Logout");
+	gbcpanel_adm.gridx = 0;
+	gbcpanel_adm.gridy = 18;
+	gbcpanel_adm.gridwidth = 6;
+	gbcpanel_adm.gridheight = 2;
+	gbcpanel_adm.fill = GridBagConstraints.BOTH;
+	gbcpanel_adm.weightx = 1;
+	gbcpanel_adm.weighty = 0;
+	gbcpanel_adm.anchor = GridBagConstraints.NORTH;
+	gbpanel_adm.setConstraints(logoutBtn2, gbcpanel_adm);
+	panels[2].add(logoutBtn2);
+	logoutBtn2.addActionListener(controller);
+
+
+	gbcpanel0.gridx = 0;
+	gbcpanel0.gridy = 0;
+	gbcpanel0.gridwidth = 20;
+	gbcpanel0.gridheight = 20;
+	gbcpanel0.fill = GridBagConstraints.BOTH;
+	gbcpanel0.weightx = 1;
+	gbcpanel0.weighty = 1;
+	gbcpanel0.anchor = GridBagConstraints.NORTH;
+	gbpanel0.setConstraints(panels[2], gbcpanel0);
+	panel0.add(panels[2]);
+
+	// ADMIN SCREEN END
 
 
     setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -165,6 +255,24 @@ public void switchToPanel(JPanel input_panel){
        panels[i].setVisible(false);
    }	
    input_panel.setVisible(true);
+}
+
+public void popupDialog(String message, String type) {
+	switch(type.toString()) {
+		case "Message":{
+			JOptionPane.showMessageDialog(this, message.toString(), "", JOptionPane.INFORMATION_MESSAGE);
+			break;
+		}	
+		case "Error":{
+			JOptionPane.showMessageDialog(this, message.toString(), "", JOptionPane.ERROR_MESSAGE);
+			break;
+			
+		}
+	}
+}
+
+public String getAdminQuery() {
+	return this.consoleText.getText();
 }
 
 public JPanel[] getPanels() {
