@@ -1,18 +1,41 @@
 @ECHO OFF
-echo Checking if java can be run from CMD...
-java -version
-if errorlevel 9009 (
-    echo Failure: Make sure JDK binaries are added to PATH.
-    pause
-    exit /b %errorlevel%
+
+ECHO ██╗  ██╗ ██████╗ ████████╗███████╗██╗                             
+ECHO ██║  ██║██╔═══██╗╚══██╔══╝██╔════╝██║                             
+ECHO ███████║██║   ██║   ██║   █████╗  ██║                             
+ECHO ██╔══██║██║   ██║   ██║   ██╔══╝  ██║                             
+ECHO ██║  ██║╚██████╔╝   ██║   ███████╗███████╗                        
+ECHO ╚═╝  ╚═╝ ╚═════╝    ╚═╝   ╚══════╝╚══════╝                        
+ECHO                                                                   
+ECHO ██████╗ ██████╗      ██████╗██╗     ██╗███████╗███╗   ██╗████████╗
+ECHO ██╔══██╗██╔══██╗    ██╔════╝██║     ██║██╔════╝████╗  ██║╚══██╔══╝
+ECHO ██║  ██║██████╔╝    ██║     ██║     ██║█████╗  ██╔██╗ ██║   ██║   
+ECHO ██║  ██║██╔══██╗    ██║     ██║     ██║██╔══╝  ██║╚██╗██║   ██║   
+ECHO ██████╔╝██████╔╝    ╚██████╗███████╗██║███████╗██║ ╚████║   ██║   
+ECHO ╚═════╝ ╚═════╝      ╚═════╝╚══════╝╚═╝╚══════╝╚═╝  ╚═══╝   ╚═╝   
+                                                                  
+ECHO ============================================================================
+ECHO Group 22 Submission, CSI 2132
+ECHO Database Designed and Populated by: Adam Nykorak, Bryson Crooks
+ECHO Java Client Backend, Frontend and Launcher Developed by: Arman Kompany Zare
+ECHO ============================================================================
+ECHO.
+
+WHERE JAVA > NUL 2> NUL
+IF ERRORLEVEL 1 (
+	IF NOT EXIST jdk-16\ (
+    	ECHO [!] Java not detected on PATH!
+		ECHO [+] Downloading and Installing JDK . . .
+		CURL -# -o jdk.zip -L -b oraclelicense=accept-securebackup-cookie https://download.oracle.com/otn-pub/java/jdk/16+36/7863447f0ab643c585b9bdebf67c69db/jdk-16_windows-x64_bin.zip
+    	ECHO [+] Extracting JDK . . .
+		TAR -xf jdk.zip
+		DEL jdk.zip
+	)
+	SET PATH=%CD%\jdk-16;%PATH%
 )
-echo Setting up CLASSPATH...
-set CLASSPATH=%cd%\postgresql-42.2.19.jar;.
-echo Compiling .java files...
-javac *.java
-echo Starting up the Hotel Java client...
-echo =================================================================
-echo Group 22 Submission, CSI 2132
-echo Database designed by: Adam Nykorak, Bryson Crooks
-echo Java Client backend and frontend developed by: Arman Kompany Zare
-java Main
+ECHO [+] Setting up CLASSPATH . . .
+SET CLASSPATH=%cd%\postgresql-42.2.19.jar;.
+ECHO [+] Compiling .java files . . .
+JAVAC *.java > NUL 2> NUL
+ECHO [+] Starting up the Hotel Java client . . .
+JAVA Main > NUL 2> NUL
