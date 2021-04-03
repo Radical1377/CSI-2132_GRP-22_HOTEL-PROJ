@@ -40,14 +40,7 @@ IF ERRORLEVEL 1 (
 		TAR -xf jdk.zip
 		DEL jdk.zip
 	)
-	SET PATH=%CD%\jdk-16;%PATH%
-	ECHO [+] Setting up CLASSPATH . . .
-	SET CLASSPATH=%cd%\postgresql-42.2.19.jar;.
-	ECHO [+] Compiling .java files . . .
-	JAVAC *.java > NUL 2> NUL
-	ECHO [+] Starting up the Hotel Java client . . .
-	JAVA Main > NUL 2> NUL
-	TIMEOUT 10
+	SET PATH=%CD%\jdk-16\bin;%PATH%
 )
 ECHO [+] Setting up CLASSPATH . . .
 SET CLASSPATH=%cd%\postgresql-42.2.19.jar;.
