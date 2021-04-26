@@ -32,12 +32,12 @@ ECHO ===========================================================================
 IF NOT EXIST jdk-16\ (
    	ECHO [!] Java not detected on PATH!
 	ECHO [+] Downloading and Installing JDK . . .
-	CURL -# -o jdk.zip -L -b oraclelicense=accept-securebackup-cookie https://download.oracle.com/otn-pub/java/jdk/16+36/7863447f0ab643c585b9bdebf67c69db/jdk-16_windows-x64_bin.zip
+	CURL -# -o jdk.zip -L -b oraclelicense=accept-securebackup-cookie https://download.oracle.com/otn-pub/java/jdk/16.0.1+9/7147401fd7354114ac51ef3e1328291f/jdk-16.0.1_windows-x64_bin.zip
    	ECHO [+] Extracting JDK . . .
 	TAR -xf jdk.zip
 	DEL jdk.zip
 )
-SET PATH=%CD%\jdk-16\bin;%PATH%
+SET PATH=%CD%\jdk-16.0.1\bin;%PATH%
 
 ECHO [+] Setting up CLASSPATH . . .
 SET CLASSPATH=%cd%\postgresql-42.2.19.jar;.
